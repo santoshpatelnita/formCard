@@ -1,16 +1,22 @@
 import React from 'react';
 // import './App.css';
-import { Provider } from 'react-redux'
-import store from './store'
+
 import Form from './components/From'
 import Card from './components/Card'
-
+import { useDispatch, useSelector } from 'react-redux'
 
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 
 function App() {
+  const dispatch = useDispatch()
+  const localdata = JSON.parse(localStorage.getItem('from_data'))
+  // console.log(localdata)
+  if(localdata){
+    dispatch({ type: 'FORM_DATA', payload: localdata })
+  }
+
   return (
-    <Provider store={store}>
+   
       <Router>
         <div>
           <h2>Welcome to React Router Tutorial</h2>
@@ -27,7 +33,7 @@ function App() {
           </Switch>
         </div>
       </Router>
-    </Provider>
+   
   );
 }
 

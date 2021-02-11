@@ -4,6 +4,8 @@ import { useDispatch, useSelector } from 'react-redux'
 
 export default function From() {
     const dispatch = useDispatch()
+    
+    // console.log(localdata)
     const Form_data = useSelector(state => state.form_data)
     const { data } = useForm()
     // const formData = []

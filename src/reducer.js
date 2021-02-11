@@ -8,7 +8,9 @@ export default (state = initialState, { type, payload }) => {
     switch (type) {
           
         case 'FORM_DATA':
-            console.log(initialState.form_data)
+            // console.log(initialState.form_data)
+            console.log(payload)
+            localStorage.setItem('from_data', JSON.stringify(payload))
             return {
                 ...state,
                 form_data: payload
