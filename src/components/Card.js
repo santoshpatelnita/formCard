@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, { useState } from 'react'
 import { useSelector } from 'react-redux'
 import { Card, ListGroup } from 'react-bootstrap'
 import { InputGroup, Button, FormControl } from 'react-bootstrap'
@@ -9,37 +9,43 @@ export default function CardCom() {
     const [myData, setmyData] = useState(formData)
     // console.log(formData)
 
-const onChange = (value) =>{
-    const searcher = new FuzzySearch(myData, ['ingredientName'], {
-        caseSensitive: false
-    });
-    const result = searcher.search(value);
-   setmyData(result)
+    const onChange = (value) => {
+        const searcher = new FuzzySearch(myData, ['nameOfTheDish'], {
+            caseSensitive: false
 
-}
+        });
+        const result = searcher.search(value);
+        setmyData(result)
+        console.log(result)
+
+    }
 
     return (
+        
         <div>
-            <InputGroup className="mb-3" onChange={e => onChange(e.target.value)}>
+           
+            <InputGroup className="md-0" onChange={e => onChange(e.target.value)}>
                 <InputGroup.Prepend >
                     <Button variant="outline-secondary">Search</Button>
                 </InputGroup.Prepend>
-                <FormControl aria-describedby="basic-addon1" />
+                <FormControl  placeholder="Search by Name of Disk" aria-describedby="basic-addon1" />
             </InputGroup>
             <div style={{ display: 'flex' }}>
 
 
                 {myData.map((item, key) =>
-                    <div>
-                        <image src={'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ03bkOmIsxD1hEsHS-Wb-ImFmOkSQplvG_Vg&usqp=CAU'} alt='picture' />
-                        <Card style={{ width: '18rem' }} key={key}>
-
+                    <div style={{ width: '200px', padding: '1rem' }}>
+                       
+                        <Card  key={key}>
+                        
                             <ListGroup variant="flush" style={{ marginLeft: 20 }}>
+                                <ListGroup.Item>{item.nameOfTheDish}</ListGroup.Item>
                                 <ListGroup.Item>{item.ingredientName}</ListGroup.Item>
                                 <ListGroup.Item>{item.ingredientQuantity}</ListGroup.Item>
-                                <ListGroup.Item>{item.nameOfTheDish}</ListGroup.Item>
-                                <ListGroup.Item>{item.stepsToCook}</ListGroup.Item>
                                 <ListGroup.Item>{item.unitIngredientQTY}</ListGroup.Item>
+                                <ListGroup.Item>{item.stepsToCook}</ListGroup.Item>
+                                <img src={item.pictureURL} alt='picture' />
+                                
                             </ListGroup>
                         </Card>
                     </div>
